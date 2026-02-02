@@ -27,7 +27,7 @@ jobs:
       - name: Sync with Upstream
         run: |
           # ⚠️ WICHTIG: Ersetze die folgende URL mit dem Repository, von dem du forken möchtest!
-          UPSTREAM_URL="https://github.com/ORIGINAL_OWNER/ORIGINAL_REPO.git"
+          UPSTREAM_URL="https://github.com/derlemue/villa-kunterbunt.git"
           
           echo "Füge Upstream hinzu: $UPSTREAM_URL"
           git remote add upstream "$UPSTREAM_URL" || git remote set-url upstream "$UPSTREAM_URL"
