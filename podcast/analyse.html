@@ -95,13 +95,13 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 40px;
+            padding: 24px;
             box-shadow: var(--shadow-soft);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 30px;
+            gap: 20px;
             animation: fadeInUp 0.8s ease-out;
             position: relative;
         }
@@ -117,8 +117,8 @@
         }
 
         .cover-art {
-            width: 250px;
-            height: 250px;
+            width: 200px;
+            height: 200px;
             border-radius: 12px;
             object-fit: cover;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -241,6 +241,38 @@
             text-align: right;
         }
 
+        .nav-link {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.highlight {
+            border-color: rgba(212, 175, 55, 0.3);
+            color: var(--accent-gold);
+        }
+
+        .nav-link.highlight:hover {
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+            color: #fff;
+        }
+
         footer {
             margin-top: auto;
             text-align: center;
@@ -345,7 +377,7 @@
                 <a href="index.html" class="nav-link">
                     <span>← Übersicht</span>
                 </a>
-                <a href="dossier.html" class="nav-link next-episode">
+                <a href="dossier.html" class="nav-link next-episode highlight">
                     <span>Nächste Episode: Das Dossier →</span>
                 </a>
             </div>

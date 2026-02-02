@@ -66,7 +66,7 @@
         /* Header Section */
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             animation: fadeInDown 1s ease-out;
         }
 
@@ -76,6 +76,7 @@
             font-weight: 700;
             margin: 0;
             background: linear-gradient(to right, #fff, #e0e0e0);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -104,12 +105,12 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 30px;
+            padding: 24px;
             box-shadow: var(--shadow-soft);
             display: grid;
-            grid-template-columns: 180px 1fr;
+            grid-template-columns: 160px 1fr;
             /* Image left, content right */
-            gap: 30px;
+            gap: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -132,8 +133,8 @@
         }
 
         .cover-art {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             border-radius: 12px;
             object-fit: cover;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
@@ -164,8 +165,8 @@
         .episode-description {
             font-size: 0.95rem;
             color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.5;
+            margin-bottom: 16px;
         }
 
         /* Player Controls */
@@ -289,6 +290,29 @@
             color: var(--accent-gold);
         }
 
+        .action-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .action-link:hover {
+            background: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
         /* Animations */
         @keyframes fadeInDown {
             from {
@@ -388,10 +412,8 @@
                     <audio id="audio-player-1" src="../assets/Die Villa Kunterbunt - Analyse Podcast.mp3"
                         preload="metadata"></audio>
                 </div>
-                <div style="margin-top: 20px; text-align: center;">
-                    <a href="analyse.html"
-                        style="font-size: 0.9rem; color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold);">Zur
-                        Einzelseite (Teilen)</a>
+                <div style="margin-top: 15px; text-align: right;">
+                    <a href="analyse.html" class="action-link">Zur Einzelseite &rarr;</a>
                 </div>
             </article>
 
@@ -427,10 +449,8 @@
                     <audio id="audio-player-2" src="../assets/Die Villa Kunterbunt - Dossier Podcast.mp3"
                         preload="metadata"></audio>
                 </div>
-                <div style="margin-top: 20px; text-align: center;">
-                    <a href="dossier.html"
-                        style="font-size: 0.9rem; color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold);">Zur
-                        Einzelseite (Teilen)</a>
+                <div style="margin-top: 15px; text-align: right;">
+                    <a href="dossier.html" class="action-link">Zur Einzelseite &rarr;</a>
                 </div>
             </article>
 
