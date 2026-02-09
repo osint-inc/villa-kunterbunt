@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zähler-Verdrahtungs-Spiel</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --terminal-bg: #d1d5db;
+            --screw-color: #6b7280;
+            --brown-cable: #8B4513;
+            --black-cable: #222222;
+            --grey-cable: #808080;
+            --highlight: #3b82f6;
+            --success: #22c55e;
+            --warning: #eab308;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 { color: #333; }
+
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Zähler Klemmenleiste */
+        .meter-block {
+            background-color: #e5e7eb;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #9ca3af;
+            margin-bottom: 30px;
+        }
+
+        .terminals-row {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 5px;
+        }
+
+        .terminal-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .terminal-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .terminal-slot {
+            width: 100%;
+            height: 60px;
+            background-color: var(--terminal-bg);
+            border: 2px solid #9ca3af;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .terminal-slot:hover {
+            border-color: var(--highlight);
+            background-color: #e2e8f0;
+        }
+
+        .screw-head {
+            position: absolute;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--screw-color);
+            border-radius: 50%;
+            border: 2px solid #4b5563;
+        }
+        .screw-head::after {
+            content: '+';
+            position: absolute;
+            color: #d1d5db;
+            font-size: 18px;
+            line-height: 16px;
+            left: 2px;
+            top: 0;
+        }
+
+        /* Kabel Darstellung in der Klemme */
+        .connected-cable {
+            width: 60%;
+            height: 100%;
+            margin-bottom: -30px; /* Schiebt es nach unten raus */
+            border-radius: 4px 4px 0 0;
+        }
+        .cable-brown { background-color: var(--brown-cable); }
+        .cable-black { background-color: var(--black-cable); }
+        .cable-grey { background-color: var(--grey-cable); }
+
+        /* Werkzeugkasten */
+        .toolbox {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .loose-cable {
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: transform 0.1s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .loose-cable:hover { transform: scale(1.05); }
+        .loose-cable.selected {
+            border-color: var(--highlight);
+            transform: scale(1.1);
+        }
+        .loose-cable.used {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+            border-color: transparent;
+        }
+
+        /* UI Elemente */
+        .progress-section { margin-bottom: 25px; }
+        .progress-bar-bg {
+            background-color: #e5e7eb;
+            height: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--highlight);
+            width: 0%;
+            transition: width 0.3s ease;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            line-height: 25px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .controls { text-align: center; }
+        
+        #finish-btn {
+            background-color: #0f172a;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #finish-btn:hover { background-color: #1e293b; }
+        #finish-btn:disabled { background-color: #94a3b8; cursor: not-allowed; }
+
+        /* Nachrichten Bereich */
+        #message-area {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            display: none; /* Standardmäßig versteckt */
+        }
+        .msg-success { background-color: #dcfce7; color: #166534; border: 2px solid var(--success); }
+        .msg-warning { background-color: #fef9c3; color: #854d0e; border: 2px solid var(--warning); }
+        .msg-error { background-color: #fee2e2; color: #991b1b; border: 2px solid var(--error); }
+
+        .msg-title { font-size: 24px; font-weight: bold; margin-bottom: 10px; display: block; }
+        .msg-body { font-size: 18px; }
+        .msg-sub { font-size: 14px; margin-top: 10px; display: block; opacity: 0.8; }
+
+        /* Konfetti Animation für den Sieg */
+        .confetti {
+            position: fixed;
+            width: 10px; height: 10px;
+            background-color: #f00;
+            animation: fall 3s linear forwards;
+            z-index: 9999;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Elektriker-Simulator 3000</h1>
+
+    <div class="game-container">
+        
+        <div class="progress-section">
+            <p>Fortschritt:</p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-fill">0%</div>
+            </div>
+        </div>
+
+        <div class="meter-block">
+            <div class="terminals-row" id="terminals-container">
+                </div>
+        </div>
+
+        <h3>Werkzeugkasten: Kabel wählen</h3>
+        <div class="toolbox">
+            <div class="loose-cable cable-brown" id="btn-brown" onclick="selectCable('brown')"></div>
+            <div class="loose-cable cable-black" id="btn-black" onclick="selectCable('black')"></div>
+            <div class="loose-cable cable-grey" id="btn-grey" onclick="selectCable('grey')"></div>
+        </div>
+
+        <div class="controls">
+            <button id="finish-btn" onclick="evaluateGame()">So, genug für heute!</button>
+        </div>
+
+        <div id="message-area">
+            </div>
+
+    </div>
+
+    <script>
+        // --- Spielzustand ---
+        let selectedColor = null;
+        // Speichert, welche Farbe an welcher Klemme (Index 0-11 für Klemme 1-12) angeschlossen ist
+        let terminalConnections = Array(12).fill(null); 
+        // Speichert, ob ein Kabel aus dem Werkzeugkasten bereits verwendet wurde
+        let cablesUsed = { brown: false, black: false, grey: false };
+
+        // --- Konfiguration ---
+        const totalCablesToPlace = 3;
+        // Die richtige Lösung (Standard Phasenbelegung L1, L2, L3 auf Klemme 1, 4, 7)
+        // Index 0 = Klemme 1, Index 3 = Klemme 4, Index 6 = Klemme 7
+        const correctSolution = {
+            0: 'brown',
+            3: 'black',
+            6: 'grey'
+        };
+
+
+        // --- Initialisierung ---
+        function initGame() {
+            const container = document.getElementById('terminals-container');
+            for (let i = 1; i <= 12; i++) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'terminal-wrapper';
+
+                const label = document.createElement('div');
+                label.className = 'terminal-label';
+                label.innerText = i;
+
+                const slot = document.createElement('div');
+                slot.className = 'terminal-slot';
+                slot.id = `terminal-${i-1}`;
+                // Klick-Handler für die Klemme
+                slot.onclick = () => connectToTerminal(i - 1);
+
+                const screw = document.createElement('div');
+                screw.className = 'screw-head';
+
+                slot.appendChild(screw);
+                wrapper.appendChild(label);
+                wrapper.appendChild(slot);
+                container.appendChild(wrapper);
+            }
+        }
+
+
+        // --- Spiellogik ---
+
+        // 1. Kabel auswählen
+        function selectCable(color) {
+            if (cablesUsed[color]) return; // Wenn schon benutzt, nichts tun
+
+            selectedColor = color;
+            
+            // Visuelles Feedback im Werkzeugkasten
+            document.querySelectorAll('.loose-cable').forEach(el => el.classList.remove('selected'));
+            document.getElementById(`btn-${color}`).classList.add('selected');
+        }
+
+        // 2. Kabel anschließen
+        function connectToTerminal(terminalIndex) {
+            // Prüfen, ob ein Kabel ausgewählt ist und die Klemme noch frei ist
+            if (!selectedColor || terminalConnections[terminalIndex] !== null) {
+                return;
+            }
+
+            // Zustand aktualisieren
+            terminalConnections[terminalIndex] = selectedColor;
+            cablesUsed[selectedColor] = true;
+
+            // Visuelles Update: Kabel in Klemme anzeigen
+            const slot = document.getElementById(`terminal-${terminalIndex}`);
+            const cableDiv = document.createElement('div');
+            cableDiv.className = `connected-cable cable-${selectedColor}`;
+            slot.appendChild(cableDiv);
+
+            // Visuelles Update: Werkzeugkasten
+            document.getElementById(`btn-${selectedColor}`).classList.remove('selected');
+            document.getElementById(`btn-${selectedColor}`).classList.add('used');
+            
+            // Auswahl zurücksetzen und Fortschritt updaten
+            selectedColor = null;
+            updateProgress();
+        }
+
+        // 3. Fortschrittsanzeige
+        function updateProgress() {
+            let placedCount = 0;
+            Object.values(cablesUsed).forEach(used => {
+                if (used) placedCount++;
+            });
+
+            // Prozent ohne Komma berechnen
+            const percent = Math.floor((placedCount / totalCablesToPlace) * 100);
+            
+            const fillElement = document.getElementById('progress-fill');
+            fillElement.style.width = `${percent}%`;
+            fillElement.innerText = `${percent}%`;
+        }
+
+        // 4. Auswertung (Button Klick)
+        function evaluateGame() {
+            let correctCount = 0;
+
+            // Prüfe die definierten Lösungen
+            for (const [terminalIdx, expectedColor] of Object.entries(correctSolution)) {
+                if (terminalConnections[terminalIdx] === expectedColor) {
+                    correctCount++;
+                }
+            }
+
+            showResult(correctCount);
+            // Button deaktivieren nach Auswertung
+            document.getElementById('finish-btn').disabled = true;
+        }
+
+        // --- Ergebnisanzeige & Nachrichten ---
+        function showResult(count) {
+            const msgArea = document.getElementById('message-area');
+            msgArea.style.display = 'block';
+            msgArea.className = ''; // Klassen zurücksetzen
+
+            let title, body, sub;
+
+            if (count === 3) {
+                // 3 Richtige: Übertriebene Gratulation
+                msgArea.classList.add('msg-success');
+                title = "MEISTERHAFT! PERFEKTION!";
+                body = "Du bist der Gott der Kabel! Die Stadtwerke wollen dir eine Statue bauen. Alles ist absolut korrekt angeschlossen!";
+                sub = "(100% Korrekt)";
+                triggerConfetti();
+            } else if (count === 2) {
+                // 2 Richtige: OK, aber nochmal ran
+                msgArea.classList.add('msg-warning');
+                title = "Ganz okay.";
+                body = "Das ist in Ordnung so, aber da musst du morgen oder übermorgen nochmal ran.";
+                sub = "(Nur 2 von 3 Kabeln waren richtig)";
+            } else {
+                // 0 oder 1 Richtig: Nicht genug für Standards
+                msgArea.classList.add('msg-error');
+                title = "Durchgefallen.";
+                body = "Das reicht leider nicht um die Standards zu erfüllen.";
+                sub = "Dafür müssen mindestens 2 Kabel richtig sein. (Du hast " + count + " richtig)";
+            }
+
+            msgArea.innerHTML = `
+                <span class="msg-title">${title}</span>
+                <span class="msg-body">${body}</span>
+                ${sub ? `<span class="msg-sub">${sub}</span>` : ''}
+            `;
+        }
+
+        // Kleines Extra: Konfetti Effekt
+        function triggerConfetti() {
+            for(let i=0; i<50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+                // Aufräumen
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // Spiel starten
+        initGame();
+
+    </script>
+</body>
+</html>
