@@ -4,7 +4,7 @@
 ### Die Chronik des Wahnsinns
 
 <p align="center">
-  <img src="../website/global/images/open_graph.png" width="30%" alt="Cover Front" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+  <img src="../website/global/images/open_graph.png" width="60%" alt="Cover Front" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
 </p>
 
 [![Status](https://img.shields.io/badge/Status-Project_Active-success?style=for-the-badge)](#)
