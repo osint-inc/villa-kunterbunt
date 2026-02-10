@@ -71,3 +71,21 @@ if __name__ == "__main__":
         "Villa Kunterbunt",
         "Das Kompendium"
     )
+
+    # 5. Meta E03
+    embed_metadata(
+        os.path.join(base_dir, "meta/audio/eon_trustpilot_enthuellungsbericht_zur_bewertungsplattform.mp3"),
+        os.path.join(base_dir, "meta/images/thumbs/das_villa_kunterbunt_kompendium_audiobook_cover_front_thumb.png"),
+        "E03: Die Analyse",
+        "Villa Kunterbunt",
+        "Das Kompendium"
+    )
+
+    # 6. Meta E04
+    embed_metadata(
+        os.path.join(base_dir, "meta/audio/eon_trustpilot_enthuellung_podcast.mp3"),
+        os.path.join(base_dir, "meta/images/thumbs/das_villa_kunterbunt_kompendium_audiobook_cover_front_thumb.png"),
+        "E04: Der Podcast",
+        "Villa Kunterbunt",
+        "Das Kompendium"
+    )
