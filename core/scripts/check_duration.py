@@ -33,6 +33,8 @@ if __name__ == "__main__":
     files = [
         "cowork/audio/die_villa_kunterbunt_anthologie_das_hoerbuch.mp3",
         "main/audio/die_villa_kunterbunt_das_hoerbuch.mp3",
+        "meta/audio/das_villa_kunterbunt_kompendium_die_erweiterte_studienanalyse.mp3",
+        "meta/audio/villa_kunterbunt_korrespondenz_epos.mp3",
         "meta/audio/eon_trustpilot_enthuellung_podcast.mp3",
         "meta/audio/eon_trustpilot_enthuellungsbericht_zur_bewertungsplattform.mp3"
     ]
