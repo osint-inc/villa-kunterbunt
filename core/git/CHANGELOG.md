@@ -28,6 +28,27 @@
 <br>
 
 
+## v.1.2.5 (Podcast & Report Veredelung)
+### "The Forensic Symphony"
+*10. Februar 2026*
+
+> **Status:** Integration des Meta-Podcast-Folge E03 und finale Design-Anpassung der Investigativ-Reports abgeschlossen.
+
+#### 🎙️ Podcast & Audio
+*   **Neue Episode (E03):** Veröffentlichung von "Die Analyse - E.ON Trustpilot Enthüllung".
+    *   **Inhalt:** Forensische Aufarbeitung des Trustpilot-Ratings als Audio-Erlebnis.
+    *   **Technik:** Implementierung neuer Player-Logik in `core/data/meta/podcast/` inklusive persistenter Playback-Events.
+    *   **Branding:** Aktualisierung des "iPhone Widget Covers" (Front/Back Hover-Effekt) im Haupt-Index.
+
+#### 🕵️ Investigativ-Report (Update)
+*   **Layout-Refinement:** Umstrukturierung der Ressourcen-Sektion in `trustme/index.html`.
+    *   **Header-Integration:** Ressourcen-Links direkt im Header für sofortigen Zugriff.
+    *   **Daten-Transparenz:** Bereitstellung von farbcodierten Buttons für Rohdaten-Einsicht (DATEN-DUMP Positiv/Negativ).
+    *   **UX-Optimierung:** 50% Verkleinerung der Buttons und Umstellung auf sachliche, knappe Beschreibungen für ein professionelles Report-Gefühl.
+
+---
+<br>
+
 ## v.1.2.4 (Investigative Update)
 ### "The Trustpilot Chronicles"
 *10. Februar 2026*
