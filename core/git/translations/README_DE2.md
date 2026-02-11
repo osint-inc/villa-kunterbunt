@@ -154,7 +154,7 @@ Hier gibt es Bilder zur Geschichte.
 Alle Bilder sind in einer Galerie.
 
 <div align="center">
-  <a href="../../data/main/illustrations/villa_kunterbunt_040.png">
+  <a href="https://derlemue.github.io/villa-kunterbunt/core/data/main/illustrations/villa_kunterbunt_040.png">
     <img src="../../data/main/illustrations/villa_kunterbunt_040_thumb.png" width="50%" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
   </a>
 </div>
