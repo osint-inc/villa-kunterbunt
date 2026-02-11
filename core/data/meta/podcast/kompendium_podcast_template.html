@@ -243,6 +243,18 @@
             box-sizing: border-box;
         }
 
+        .info-btn.source-btn.has-source {
+            background: rgba(40, 167, 69, 0.1);
+            border-color: rgba(40, 167, 69, 0.3);
+            color: #2ecc71;
+        }
+
+        .info-btn.source-btn.has-source:hover {
+            background: rgba(40, 167, 69, 0.2);
+            border-color: rgba(40, 167, 69, 0.5);
+            color: #2ecc71;
+        }
+
         .info-text.visible {
             display: block;
         }
@@ -465,7 +477,7 @@
 
             <div class="info-bar">
                 <button id="tts-btn" class="info-btn" onclick="toggleInfo()">TTS</button>
-                <button class="info-btn" onclick="openSource('{{ SOURCE_URL }}')">Quelle</button>
+                <button class="info-btn source-btn has-source" onclick="openSource('#')">Quelle</button>
             </div>
 
             <div id="info-text" class="info-text">

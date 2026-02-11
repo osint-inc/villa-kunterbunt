@@ -245,9 +245,19 @@
             width: 100%;
             height: 6px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            cursor: pointer;
             position: relative;
+        }
+
+        .info-btn.source-btn.has-source {
+            background: rgba(40, 167, 69, 0.1);
+            border-color: rgba(40, 167, 69, 0.3);
+            color: #2ecc71;
+        }
+
+        .info-btn.source-btn.has-source:hover {
+            background: rgba(40, 167, 69, 0.2);
+            border-color: rgba(40, 167, 69, 0.5);
+            color: #2ecc71;
         }
 
         .progress-fill {
@@ -512,11 +522,10 @@
 
             <div class="info-bar">
                 <button id="tts-btn" class="info-btn" onclick="toggleInfo()">TTS</button>
-                <button class="info-btn"
+                <button class="info-btn source-btn has-source"
                     onclick="openSource('https://github.com/derlemue/villa-kunterbunt')">Repo</button>
-                <button class="info-btn"
-                    onclick="openSource('https://derlemue.github.io/villa-kunterbunt/core/data/main/documents/villa_kunterbunt_korrespondenz_epos_derlemue.pdf')">Dossier
-                    (PDF)</button>
+                <button class="info-btn source-btn has-source"
+                    onclick="openSource('https://derlemue.github.io/villa-kunterbunt/core/data/main/documents/villa_kunterbunt_korrespondenz_epos_derlemue.pdf')">Quelle</button>
             </div>
 
             <div id="info-text" class="info-text">
