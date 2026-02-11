@@ -7,169 +7,253 @@
     <title>Anleitung zum Hochladen - Villa Kunterbunt</title>
     <meta name="description" content="Einfache Anleitung für Firmen: So reichen Sie Dokumente ein.">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-dark: #0f1115;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-gold: #d4af37;
+            --glass-bg: rgba(20, 20, 20, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.03);
+            --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.8;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        /* Ambient Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../../../website/data/main/images/wallpaper.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(60px) brightness(0.25) saturate(1.2);
+            z-index: -1;
+            transform: scale(1.1);
         }
 
         .container {
+            width: 100%;
             max-width: 900px;
-            margin: 0 auto;
-            background: white;
+            margin: 40px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 50px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
         }
 
         h1 {
-            color: #667eea;
-            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
             margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #e0e0e0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
+            color: var(--accent-gold);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
         }
 
         h2 {
-            color: #764ba2;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-main);
             font-size: 1.8rem;
-            margin-top: 40px;
+            margin-top: 50px;
             margin-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
             padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
         }
 
         h3 {
-            color: #667eea;
+            color: var(--accent-gold);
             font-size: 1.3rem;
             margin-top: 30px;
             margin-bottom: 15px;
         }
 
         p {
+            color: var(--text-muted);
             margin-bottom: 15px;
-            text-align: left;
-            /* Besser für Einfache Sprache */
         }
 
-        .diagram-container {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .mermaid {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            display: inline-block;
+        strong {
+            color: var(--text-main);
         }
 
         .highlight-box {
-            background: rgba(102, 126, 234, 0.1);
-            border-left: 4px solid #667eea;
+            background: rgba(212, 175, 55, 0.05);
+            /* Gold tint */
+            border-left: 3px solid var(--accent-gold);
             padding: 20px;
             margin: 20px 0;
-            border-radius: 8px;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-muted);
         }
 
         .highlight-box strong {
-            color: #667eea;
-        }
-
-        ol {
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        ol li {
-            margin-bottom: 15px;
-            padding-left: 10px;
-        }
-
-        ul {
-            margin-left: 40px;
-            margin-bottom: 15px;
-        }
-
-        ul li {
-            margin-bottom: 10px;
+            color: var(--accent-gold);
         }
 
         code {
-            background: #f4f4f4;
+            background: rgba(255, 255, 255, 0.1);
             padding: 2px 6px;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
-            color: #e83e8c;
+            color: #ff9e9e;
+            /* Soft red for code */
         }
 
         .example {
-            background: #f8f9fa;
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
             border-radius: 8px;
             margin: 15px 0;
             font-family: 'Courier New', monospace;
+            color: var(--text-muted);
+            border: 1px solid var(--glass-border);
         }
 
+        .diagram-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Mermaid styling adjustment for dark mode */
+        .mermaid {
+            background: transparent;
+        }
+
+        /* Lists */
+        ol,
+        ul {
+            color: var(--text-muted);
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+        }
+
+        /* Status Badges */
         .status-badge {
             display: inline-block;
             padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             margin: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .status-new {
-            background: #fef3cd;
-            color: #856404;
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.3);
         }
 
         .status-approved {
-            background: #d4edda;
-            color: #155724;
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
         }
 
-        .back-link {
-            display: inline-block;
+        /* Footer buttons */
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
             margin-top: 40px;
-            padding: 12px 24px;
-            background: #764ba2;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            flex-wrap: wrap;
         }
 
-        .back-link:hover {
-            background: #5f3c82;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-link {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+        }
+
+        .btn-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
         }
 
         @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
+                margin: 20px;
             }
 
             h1 {
@@ -180,50 +264,57 @@
 </head>
 
 <body>
+    <div class="ambient-bg"></div>
+
     <div class="container">
         <h1>📤 Anleitung zum Hochladen</h1>
-        <p class="subtitle">Wie Firmen Dokumente einreichen können. In Einfacher Sprache.</p>
+        <p class="subtitle">Einfache Erklärung für Firmen zur Abgabe von Dokumenten</p>
 
         <div class="highlight-box">
-            <strong>Wichtig:</strong> Hier erklären wir, wie Sie Dokumente (PDF oder Word) hochladen können.
-            Bitte halten Sie sich an die Regeln. Dann behalten wir den Überblick.
+            <strong>Wichtig:</strong> Hier erklären wir, wie Sie Dokumente (PDF, Word oder Markdown) abgeben.
+            Das ist wichtig für die Ordnung im Archiv.
         </div>
 
-        <h2>📊 So läuft das ab</h2>
+        <h2>📊 So läuft es ab</h2>
         <div class="diagram-container">
             <div class="mermaid">
+                %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#d4af37',
+                'edgeLabelBackground':'#0f1115', 'tertiaryColor': '#1a1a1a'}}}%%
                 graph TD
-                A["Start: Dokument fertig"] --> B["Datei umbenennen: NEW_ davor schreiben"]
-                B --> C["Hochladen in Ordner: core/git/reports/"]
-                C --> D["Aenderungs-Vorschlag machen (Pull Request)"]
-                D --> E{"Pruefung durch Chef"}
+                A["Start: Dokument bereit"] --> B["Name ändern: NEW_ davor schreiben"]
+                B --> C["Hochladen in: /core/git/reports/"]
+                C --> D["Änderung vorschlagen (PR)"]
+                D --> E{"Prüfung durch Admin"}
 
-                E -- "Fehler gefunden" --> F["Rueckmeldung an Firma"]
+                E -- "Fehler gefunden" --> F["Rückmeldung an Firma"]
                 F --> B
 
-                E -- "Alles okay" --> G["NEW_ wird entfernt"]
-                G --> H["Dokument ist veroeffentlicht"]
+                E -- "Alles gut" --> G["NEW_ wird gelöscht"]
+                G --> H["Dokument ist im Archiv"]
                 H --> I["Ende"]
             </div>
+            <p style="font-size: 0.8rem; margin-top: 10px; color: var(--text-muted);">Schritte bei der Dokumenten-Abgabe
+            </p>
         </div>
 
         <h2>1️⃣ Datei vorbereiten</h2>
-        <p>Bevor Sie eine Datei hochladen: Ändern Sie den Namen.</p>
-        <p>Schreiben Sie <strong>NEW_</strong> vor den Namen.</p>
-        <p>Das heißt: Das ist neu. Wir müssen das prüfen.</p>
+        <p>Bevor Sie eine Datei hochladen: Ändern Sie den Namen der Datei.
+            Schreiben Sie ganz am Anfang <strong>NEW_</strong> davor.
+            So wissen wir: Das ist ein neues Dokument.</p>
 
         <div class="highlight-box">
-            <strong>So muss es aussehen:</strong> <code>NEW_Dateiname.Dateiendung</code>
+            <strong>Beispiel für den Namen:</strong> <code>NEW_Dateiname.pdf</code>
         </div>
 
-        <p><strong>Beispiele:</strong></p>
+        <p><strong>Hier sind Beispiele:</strong></p>
         <div class="example">
-            NEW_Bericht_FirmaXY.pdf<br>
-            NEW_Erklaerung.docx
+            NEW_Abschlussbericht_FirmaXY.pdf<br>
+            NEW_Dokumentation.docx<br>
+            NEW_Anleitung.md
         </div>
 
         <h2>2️⃣ Der richtige Ordner</h2>
-        <p>Alle Dokumente müssen in diesen Ordner:</p>
+        <p>Alle Dokumente müssen in diesen Ordner im Repository:</p>
         <div class="highlight-box">
             <code>core/git/reports/</code>
         </div>
@@ -231,68 +322,67 @@
         <h2>3️⃣ Schritt für Schritt Anleitung</h2>
         <ol>
             <li>
-                <strong>Gehen Sie zum Ordner:</strong><br>
-                Klicken Sie auf GitHub in den Ordner <code>core/git/reports/</code>.
+                <strong>Ordner aufrufen:</strong><br>
+                Gehen Sie auf GitHub in den Ordner <code>core/git/reports/</code>.
             </li>
             <li>
                 <strong>Datei hochladen:</strong>
                 <ul>
-                    <li>Klicken Sie oben rechts auf <strong>"Add file"</strong> (Datei hinzufügen).</li>
-                    <li>Dann auf <strong>"Upload files"</strong> (Dateien hochladen).</li>
-                    <li>Ziehen Sie Ihre Datei mit dem <code>NEW_</code> Namen in das Feld.</li>
+                    <li>Klicken Sie oben rechts auf <strong>"Add file"</strong> und dann auf
+                        <strong>"Upload files"</strong>.
+                    </li>
+                    <li>Ziehen Sie Ihre Datei (mit <code>NEW_</code> am Anfang) in das Feld.</li>
                 </ul>
-                <img src="../../images/guide/file_selection.png" alt="Bildschirm-Foto: Datei auswählen"
-                    style="width: 100%; border-radius: 8px; margin-top: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #eee;">
+                <img src="../../images/guide/file_selection.png" alt="Bild: So wählen Sie die Datei aus">
             </li>
             <li>
                 <strong>Speichern (Commit):</strong>
                 <ul>
-                    <li>Schreiben Sie kurz, was das für eine Datei ist. (Bei "Commit changes").</li>
-                    <li>Wählen Sie unten: <strong>"Create a new branch..."</strong> (Neuen Zweig erstellen).</li>
-                    <li>Klicken Sie auf den grünen Knopf <strong>"Propose changes"</strong> (Änderungen vorschlagen).
-                    </li>
+                    <li>Schreiben Sie bei "Commit changes" kurz auf, was Sie hochladen (z. B. <em>"Abgabe Bericht Firma
+                            XY"</em>).</li>
+                    <li>Wählen Sie <strong>"Create a new branch for this commit and start a pull
+                            request"</strong>.</li>
+                    <li>Klicken Sie auf <strong>"Propose changes"</strong>.</li>
                 </ul>
             </li>
             <li>
-                <strong>Vorschlag absenden (Pull Request):</strong><br>
-                Klicken Sie am Ende auf <strong>"Create pull request"</strong>.
-                <img src="../../../assets/images/guide/pr_creation_cropped.png"
-                    alt="Bildschirm-Foto: Pull Request erstellen"
-                    style="width: 100%; border-radius: 8px; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #eee;">
+                <strong>Vorschlag senden (Pull Request):</strong><br>
+                Klicken Sie zum Schluss auf <strong>"Create pull request"</strong>.
+                <img src="../../images/guide/pr_creation_cropped.png" alt="Bild: So senden Sie den Vorschlag">
             </li>
         </ol>
 
         <h2>4️⃣ Was passiert dann?</h2>
-        <p>Wir prüfen Ihre Datei.</p>
+        <p>Nach der Abgabe prüft die Projekt-Leitung das Dokument:</p>
 
-        <img src="../../../assets/images/guide/pr_success_cropped.png"
-            alt="Bildschirm-Foto: Datei erfolgreich eingereicht"
-            style="width: 100%; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #eee;">
+        <img src="../../images/guide/pr_success_cropped.png" alt="Bild: Abgabe erfolgreich">
 
-        <h3>Status "Neu"</h3>
-        <p><span class="status-badge status-new">📋 NEU</span> Die Datei heißt noch <code>NEW_...</code>. Wir haben sie
-            noch nicht geprüft.</p>
+        <h3>Status "Eingegangen"</h3>
+        <p><span class="status-badge status-new">📋 NEU</span> Die Datei hat noch das <code>NEW_</code> am Anfang.
+        </p>
 
         <h3>Status "Fertig"</h3>
-        <p><span class="status-badge status-approved">✅ FREIGEGEBEN</span> Wir haben die Datei geprüft. Alles ist gut.
-            Wir entfernen das <code>NEW_</code>. Jetzt können alle die Datei sehen.</p>
+        <p><span class="status-badge status-approved">✅ FREIGEGEBEN</span> Wenn alles okay ist, wird das
+            <code>NEW_</code> gelöscht.
+            Jetzt ist das Dokument offiziell im Archiv. Alle können es sehen.
+        </p>
 
-        <div class="highlight-box" style="margin-top: 40px;">
-            <strong>💡 Hinweis:</strong> Wenn etwas falsch ist, sagen wir Ihnen Bescheid. Dann müssen Sie es ändern und
-            nochmal hochladen.
+        <div class="highlight-box">
+            <strong>💡 Hinweis:</strong> Wenn etwas nicht stimmt, bekommen Sie eine Nachricht. Dann müssen Sie die Datei
+            ändern und nochmal hochladen.
         </div>
 
-        <div style="text-align: center;">
-            <a href="https://github.com/derlemue/villa-kunterbunt/blob/main/README_DE2.md#firmen" class="back-link">←
-                Zurück
-                zur Start-Seite (Einfache Sprache)</a>
+        <div class="button-group">
+            <a href="https://github.com/derlemue/villa-kunterbunt/blob/main/README_DE2.md#firmen" class="btn btn-link">
+                Zurück zur Start-Seite (Einfache Sprache)
+            </a>
         </div>
     </div>
 
     <script>
         mermaid.initialize({
             startOnLoad: true,
-            theme: 'default',
+            theme: 'dark',
             flowchart: {
                 useMaxWidth: true,
                 htmlLabels: true,

@@ -8,207 +8,293 @@
     <meta name="description"
         content="Guide for companies on how to submit documents to the Villa Kunterbunt repository">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-dark: #0f1115;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-gold: #d4af37;
+            --glass-bg: rgba(20, 20, 20, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.03);
+            --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.8;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        /* Ambient Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../../../website/data/main/images/wallpaper.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(60px) brightness(0.25) saturate(1.2);
+            z-index: -1;
+            transform: scale(1.1);
         }
 
         .container {
+            width: 100%;
             max-width: 900px;
-            margin: 0 auto;
-            background: white;
+            margin: 40px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 50px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
         }
 
         h1 {
-            color: #667eea;
-            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
             margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #e0e0e0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
+            color: var(--accent-gold);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
         }
 
         h2 {
-            color: #764ba2;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-main);
             font-size: 1.8rem;
-            margin-top: 40px;
+            margin-top: 50px;
             margin-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
             padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
         }
 
         h3 {
-            color: #667eea;
+            color: var(--accent-gold);
             font-size: 1.3rem;
             margin-top: 30px;
             margin-bottom: 15px;
         }
 
         p {
+            color: var(--text-muted);
             margin-bottom: 15px;
-            text-align: justify;
         }
 
-        .diagram-container {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .mermaid {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            display: inline-block;
+        strong {
+            color: var(--text-main);
         }
 
         .highlight-box {
-            background: rgba(102, 126, 234, 0.1);
-            border-left: 4px solid #667eea;
+            background: rgba(212, 175, 55, 0.05);
+            /* Gold tint */
+            border-left: 3px solid var(--accent-gold);
             padding: 20px;
             margin: 20px 0;
-            border-radius: 8px;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-muted);
         }
 
         .highlight-box strong {
-            color: #667eea;
-        }
-
-        ol {
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        ol li {
-            margin-bottom: 15px;
-            padding-left: 10px;
-        }
-
-        ul {
-            margin-left: 40px;
-            margin-bottom: 15px;
-        }
-
-        ul li {
-            margin-bottom: 10px;
+            color: var(--accent-gold);
         }
 
         code {
-            background: #f4f4f4;
+            background: rgba(255, 255, 255, 0.1);
             padding: 2px 6px;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
-            color: #e83e8c;
+            color: #ff9e9e;
+            /* Soft red for code */
         }
 
         .example {
-            background: #f8f9fa;
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
             border-radius: 8px;
             margin: 15px 0;
             font-family: 'Courier New', monospace;
+            color: var(--text-muted);
+            border: 1px solid var(--glass-border);
         }
 
+        .diagram-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Mermaid styling adjustment for dark mode */
+        .mermaid {
+            background: transparent;
+        }
+
+        /* Lists */
+        ol,
+        ul {
+            color: var(--text-muted);
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+        }
+
+        /* Status Badges */
         .status-badge {
             display: inline-block;
             padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             margin: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .status-new {
-            background: #fef3cd;
-            color: #856404;
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.3);
         }
 
         .status-approved {
-            background: #d4edda;
-            color: #155724;
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 40px;
+        /* Footer buttons */
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             padding: 12px 24px;
-            background: #764ba2;
-            color: white;
+            border-radius: 30px;
             text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
             font-weight: 500;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
-        .back-link:hover {
-            background: #5f3c82;
+        .btn-repo {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+        }
+
+        .btn-repo:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
         }
 
-        .step-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background: #667eea;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            font-weight: bold;
-            margin-right: 10px;
+        .btn-website {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--accent-gold);
+        }
+
+        .btn-website:hover {
+            background: rgba(212, 175, 55, 0.3);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
+                margin: 20px;
             }
 
             h1 {
                 font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 
 <body>
+    <div class="ambient-bg"></div>
+
     <div class="container">
         <h1>📤 Upload Guide</h1>
-        <p class="subtitle">Guide for Companies on Document Submission</p>
+        <p class="subtitle">Guide for companies on how to submit documents</p>
 
         <div class="highlight-box">
-            <strong>Important:</strong> This guide describes the structured process for submitting PDF, Markdown, or
-            Word documents. It ensures clean version control and a clear overview of the processing status.
+            <strong>Important:</strong> This guide describes the structured process for submitting PDF,
+            Markdown, or Word documents. It ensures clean version control and a clear overview of the
+            processing status.
         </div>
 
         <h2>📊 Process Overview</h2>
         <div class="diagram-container">
             <div class="mermaid">
+                %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#d4af37',
+                'edgeLabelBackground':'#0f1115', 'tertiaryColor': '#1a1a1a'}}}%%
                 graph TD
                 A[Start: Document created] --> B[Rename file: Add prefix 'NEW_']
                 B --> C[Upload to folder: /core/git/reports/]
@@ -218,15 +304,17 @@
                 E -- Correction needed --> F[Feedback to company]
                 F --> B
 
-                E -- Approved --> G[Remove prefix 'NEW_']
+                E -- Approved --> G[Prefix 'NEW_' will be removed]
                 G --> H[Document officially archived]
                 H --> I[End]
             </div>
+            <p style="font-size: 0.8rem; margin-top: 10px; color: var(--text-muted);">Process flow of
+                document submission</p>
         </div>
 
         <h2>1️⃣ File Preparation</h2>
         <p>Before uploading a file, ensure it complies with the required naming scheme. Every new document must be
-            prefixed with <strong>NEW_</strong>. This abbreviation serves as an entry marker for the administration.</p>
+            prefixed with <strong>NEW_</strong>. This prefix serves as an entry marker for the administration.</p>
 
         <div class="highlight-box">
             <strong>Filename:</strong> <code>NEW_Filename.Extension</code>
@@ -249,69 +337,79 @@
         <ol>
             <li>
                 <strong>Access Repository:</strong><br>
-                Navigate on GitHub to the directory <code>assets/reports/</code>.
+                Navigate to the directory <code>core/git/reports/</code> on GitHub.
             </li>
             <li>
                 <strong>Upload File:</strong>
                 <ul>
-                    <li>Click the <strong>"Add file"</strong> button in the top right corner and select <strong>"Upload
-                            files"</strong>.</li>
-                    <li>Drag the prepared file (with the <code>NEW_</code> prefix) into the upload field or select it
-                        from your local computer.</li>
+                    <li>Click the <strong>"Add file"</strong> button at the top right and select
+                        <strong>"Upload files"</strong>.
+                    </li>
+                    <li>Drag the prepared file (with the <code>NEW_</code> prefix) into the upload field or select
+                        it from your local computer.</li>
                 </ul>
-                <img src="../../images/guide/file_selection.png" alt="Screenshot File Selection"
-                    style="width: 100%; border-radius: 8px; margin-top: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #eee;">
+                <img src="../../images/guide/file_selection.png" alt="Screenshot File Selection">
             </li>
             <li>
                 <strong>Create Commit:</strong>
                 <ul>
-                    <li>Enter a brief, precise description in the "Commit changes" field (e.g., <em>"Submission Final
-                            Report Company XY"</em>).</li>
+                    <li>Enter a brief, precise description in the "Commit changes" field (e.g., <em>"Submission of
+                            Final Report Company XY"</em>).</li>
                     <li>Select the option <strong>"Create a new branch for this commit and start a pull
                             request"</strong>.</li>
-                    <li>Click <strong>"Propose changes"</strong>.</li>
+                    <li>Click on <strong>"Propose changes"</strong>.</li>
                 </ul>
             </li>
             <li>
                 <strong>Open Pull Request (PR):</strong><br>
-                Finally, click <strong>"Create pull request"</strong>.
-                <img src="../../images/guide/pr_creation_cropped.png" alt="Screenshot Pull Request Creation"
-                    style="width: 100%; border-radius: 8px; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #eee;">
+                Finally, click on <strong>"Create pull request"</strong>.
+                <img src="../../images/guide/pr_creation_cropped.png" alt="Screenshot Pull Request Creation">
             </li>
         </ol>
 
         <h2>4️⃣ Approval and Processing</h2>
         <p>After the file has been submitted, it will be reviewed by the project management:</p>
 
-        <img src="../../images/guide/pr_success_cropped.png" alt="Screenshot Successful Pull Request"
-            style="width: 100%; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #eee;">
+        <img src="../../images/guide/pr_success_cropped.png" alt="Screenshot Successful Pull Request">
 
         <h3>Status "Received"</h3>
         <p><span class="status-badge status-new">📋 NEW</span> The file remains in the folder with the <code>NEW_</code>
-            prefix.</p>
+            prefix.
+        </p>
 
         <h3>Status "Approved"</h3>
         <p><span class="status-badge status-approved">✅ APPROVED</span> Once the document has been reviewed and
-            accepted, the <code>NEW_</code> prefix will be removed (renamed to <code>FinalReport_CompanyXY.pdf</code>).
-            This officially integrates the document into the repository and makes it finally accessible to all
-            participants.</p>
+            accepted, the <code>NEW_</code> prefix will be removed (renamed to
+            <code>FinalReport_CompanyXY.pdf</code>). This officially integrates the document into the collection and
+            makes it finally accessible to all participants.
+        </p>
 
-        <div class="highlight-box" style="margin-top: 40px;">
+        <div class="highlight-box">
             <strong>💡 Note:</strong> If corrections are required, you will receive feedback via the Pull Request.
-            Please make the necessary adjustments and resubmit the file.
+            Please make the required adjustments and resubmit the file.
         </div>
 
-        <div style="text-align: center;">
-            <a href="https://github.com/derlemue/villa-kunterbunt/blob/main/README_EN.md#companies-en"
-                class="back-link">← Back to
-                Repository</a>
+        <div class="button-group">
+            <a href="https://github.com/derlemue/villa-kunterbunt" class="btn btn-repo">
+                <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+                Back to Repository
+            </a>
+
+            <a href="https://derlemue.github.io/villa-kunterbunt/" target="_blank" class="btn btn-website">
+                <span>🚀</span>
+                To Main Page
+            </a>
         </div>
     </div>
 
     <script>
         mermaid.initialize({
             startOnLoad: true,
-            theme: 'default',
+            theme: 'dark',
             flowchart: {
                 useMaxWidth: true,
                 htmlLabels: true,

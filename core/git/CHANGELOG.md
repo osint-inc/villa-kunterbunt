@@ -56,6 +56,10 @@
 *   **Mobile Widget:** Optimierung der iPhone-Player-Anzeige durch synchronisierte Audiobook-Cover-Metadaten.
 *   **E04 Metadata Fix:** Korrektur fehlerhafter Episoden-Metadaten (Titel/Album) für Episode 04 im Index-Portal und auf der Einzelseite zur Behebung der Fehl-Anzeige auf mobilen Geräten (iPhone Widget).
 *   **Repository Cleanup:** Entfernung veralteter Backup-Dateien (`.queue/`), redundanter Platzhalter (`core/templates/`) und unnötiger `.keep` Dateien zur Bereinigung der Repository-Struktur.
+*   **Upload-Guide Redesign & Translation:** Vollständige Neugestaltung und inhaltliche Aktualisierung der Upload-Leitfäden basierend auf dem neuen Premium-Design:
+    *   **Premium Template Sync:** Übernahme des Dark-Mode Glassmorphism Designs für alle Sprachversionen.
+    *   **Englische Version (index_en):** Präzise 1:1 Übersetzung inkl. Mermaid-Diagramm-Beschreibungen und Footern.
+    *   **Einfache Sprache (index_de2):** Barrierefreie Übersetzung in "Leichte Sprache" zur Optimierung der Zugänglichkeit für alle Projektbeteiligten bei vollem Design-Erhalt.
 
 ---
 <br>
