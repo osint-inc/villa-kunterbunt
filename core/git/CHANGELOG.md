@@ -55,6 +55,7 @@
 *   **Link-Fix (Index):** Umstellung der Fork-Links von Repositories auf GitHub-Pages-URLs für direkten Zugriff auf die Live-Demos.
 *   **Mobile Widget:** Optimierung der iPhone-Player-Anzeige durch synchronisierte Audiobook-Cover-Metadaten.
 *   **E04 Metadata Fix:** Korrektur fehlerhafter Episoden-Metadaten (Titel/Album) für Episode 04 im Index-Portal und auf der Einzelseite zur Behebung der Fehl-Anzeige auf mobilen Geräten (iPhone Widget).
+*   **Repository Cleanup:** Entfernung veralteter Backup-Dateien (`.queue/`), redundanter Platzhalter (`core/templates/`) und unnötiger `.keep` Dateien zur Bereinigung der Repository-Struktur.
 
 ---
 <br>
